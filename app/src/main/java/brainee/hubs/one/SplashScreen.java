@@ -39,7 +39,7 @@ public class SplashScreen extends AppCompatActivity {
                 //Permission Granted
             } else {
 
-                //ActivityCompat.requestPermissions(new String[Integer.parseInt(Manifest.permission.WRITE_EXTERNAL_STORAGE)], request_code);
+                ActivityCompat.requestPermissions(SplashScreen.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, request_code);
             }
         } else {
             Toast.makeText(this, "Permission Granted", Toast.LENGTH_SHORT).show();
@@ -61,14 +61,14 @@ public class SplashScreen extends AppCompatActivity {
     }
 
     public void showDetails() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(SplashScreen.this);
         builder.setTitle("WRITE STORAGE PERMISSION")
                 .setMessage("This permission is necessary to access videos in this device!")
                 .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         if (SDK_INT >= Build.VERSION_CODES.M) {
-                            requestPermissions(new String[Integer.parseInt(Manifest.permission.WRITE_EXTERNAL_STORAGE)], request_code);
+                            ActivityCompat.requestPermissions(SplashScreen.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, request_code);
                         }
                     }
                 })
@@ -79,5 +79,7 @@ public class SplashScreen extends AppCompatActivity {
                         finish();
                     }
                 });
+        builder.create();
+        builder.show();
     }
 }
